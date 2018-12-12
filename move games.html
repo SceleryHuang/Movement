@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1 {width:100px; height:100px; background:red; position:absolute; left:600px; top:50px;}
+        #div2 {width:1px; height:300px; position:absolute; left:100px; top:0; background:black;}
+        #div3 {width:1px; height:300px; position:absolute; left:300px; top:0; background:black;}
+        #div4 {width:1px; height:300px; position:absolute; left:500px; top:0; background:black;}
+        #div5 {width:1px; height:300px; position:absolute; left:700px; top:0; background:black;}
+        #div6 {width:1px; height:300px; position:absolute; left:900px; top:0; background:black;}
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv = document.getElementById('div1');
+            var btn1 = document.getElementsByTagName('input')[0];
+            var btn2 = document.getElementsByTagName('input')[1];
+            var btn3 = document.getElementsByTagName('input')[2];
+            var btn4 = document.getElementsByTagName('input')[3];
+            var btn5 = document.getElementsByTagName('input')[4];
+
+
+
+            btn1.onclick = function(){
+                moveto(100);
+            };
+            btn2.onclick = function(){
+                moveto(300);
+            };
+            btn3.onclick = function(){
+                moveto(500);
+            };
+            btn4.onclick = function(){
+                moveto(700);
+            };
+            btn5.onclick = function(){
+                moveto(900);
+            };
+
+        };
+
+        var timer = null;
+        function moveto(target)
+        {
+            var oDiv = document.getElementById('div1');
+
+            clearInterval(timer);
+            timer = setInterval(function () {
+                var speed=0;
+                //speed=Math.floor(speed);
+                if (oDiv.offsetLeft<target){
+                    speed = 7;
+                }
+                else
+                {
+                    speed = -7
+                }
+
+                if(Math.abs(oDiv.offsetLeft-target)<=7){
+                    clearInterval(timer);
+                    oDiv.style.left = target+'px';
+                }
+                else
+                {
+                    oDiv.style.left = oDiv.offsetLeft +speed+'px';
+                }
+            },30);
+        }
+    </script>
+</head>
+<body>
+<input id = 'btn1' type="button" value="到100">
+<input id = 'btn2' type="button" value="到300">
+<input id = 'btn3' type="button" value="到500">
+<input id = 'btn4' type="button" value="到700">
+<input id = 'btn5' type="button" value="到900">
+<div id = 'div1'></div>
+<div id = 'div2'></div>
+<div id = 'div3'></div>
+<div id = 'div4'></div>
+<div id = 'div5'></div>
+<div id = 'div6'></div>
+</body>
+</html>
