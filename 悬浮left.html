@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 150px;
+            height: 300px;
+            background: aquamarine;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+    <script>
+        window.onscroll = function () {
+            var oDiv = document.getElementById('div1');
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            //悬浮在上面
+            StartMove(scrollTop);
+            //悬浮在下面
+            //StartMove(document.documentElement.clientHeight - oDiv.offsetHeight+scrollTop);
+            //悬浮在中间
+            // StartMove(parseInt((document.documentElement.clientHeight - oDiv.offsetHeight)/2+scrollTop));
+        };
+        var timmer = null;
+        function StartMove(Target) {
+            var oDiv = document.getElementById('div1');
+
+            clearInterval(timmer);
+            timmer = setInterval(function () {
+                var speed = (Target-oDiv.offsetTop)/4;
+                speed = speed>0?Math.ceil(speed):Math.floor(speed);
+
+                if (oDiv.offsetTop == Target)
+                {
+                    clearInterval(timmer);
+                }
+                else
+                {
+                    document.title=Target;
+                    document.getElementById('txt1').value=oDiv.offsetTop;
+                    oDiv.style.top = oDiv.offsetTop +speed +'px';
+
+                }
+
+            },30);
+
+
+
+
+        }
+    </script>
+</head>
+<body style="height: 5000px">
+<input type="text" id="txt1" style="position:fixed; right:0; top:0;" />
+<div id = 'div1'></div>
+</body>
+</html>
